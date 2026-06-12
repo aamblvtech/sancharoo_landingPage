@@ -1,0 +1,17 @@
+{
+  "name": "Sancharoo",
+  "short_name": "Sancharoo",
+  "description": "Book rides, deliver parcels, and earn as a captain.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F1F6FB",
+  "theme_color": "#0B1730",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
