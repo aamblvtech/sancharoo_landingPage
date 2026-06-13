@@ -7,7 +7,7 @@ export default function Hero() {
     >
       <div className="absolute inset-0 -z-10">
         <img
-          alt=""
+          alt="Busy Indian city street traffic with cars and bikes at dusk"
           className="w-full h-full object-cover"
           src="https://images.unsplash.com/photo-1632040804304-4094a1a63be7?crop=entropy&amp;cs=srgb&amp;fm=jpg&amp;ixid=M3w4NjA3MDB8MHwxfHNlYXJjaHwyfHxpbmRpYSUyMHN0cmVldCUyMHRyYWZmaWN8ZW58MHx8fHwxNzgxMDg4MTM1fDA&amp;ixlib=rb-4.1.0&amp;q=85"
         />
@@ -55,7 +55,8 @@ export default function Hero() {
           </h1>
           <p className="mt-6 text-base md:text-lg text-slate-700 max-w-xl leading-relaxed">
             Book a Bike, Cab or Parcel in minutes. Or flip the switch — recharge
-            a Captain Pass for the day and keep <strong className="text-slate-950">100% of every fare </strong>
+            a Captain Pass for the day and keep{" "}
+            <strong className="text-slate-950">100% of every fare </strong>
             you earn.
           </p>
           {/* <div className="mt-8 flex flex-wrap items-center gap-6">
@@ -85,42 +86,51 @@ export default function Hero() {
             </div>
 
             {/* Rider Card */}
-            <div className="p-1 bg-gradient-to-r from-[#0099FB]/10 to-[#0099FB]/5 rounded-2xl border border-[#0099FB]/20 transition-all hover:scale-[1.01] duration-200">
+            <div className="p-6 bg-slate-50/70 rounded-2xl border border-slate-100 flex flex-col gap-3 transition-all hover:scale-[1.01] duration-200">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-black tracking-widest uppercase bg-[#0099FB]/10 px-3 py-1 rounded-full text-[#0099FB]">
+                  I WANT A RIDE
+                </span>
+              </div>
+              <h4 className="font-display text-2xl font-black text-[#0B1730]">
+                Sancharoo Rider
+              </h4>
               <a
                 href="https://rider.sancharoo.in"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col items-center justify-center w-full py-8 px-6 text-center rounded-2xl bg-[#0099FB] hover:bg-[#008AE6] text-white shadow-[0_12px_28px_rgba(0,153,251,0.35)] transition-all group"
+                className="flex items-center justify-center w-full h-14 rounded-xl text-base font-bold transition-all bg-[#0099FB] hover:bg-[#008AE6] text-white shadow-[0_4px_12px_rgba(0,153,251,0.25)] hover:shadow-[0_6px_20px_rgba(0,153,251,0.35)]"
               >
-                <span className="text-xs font-black tracking-widest uppercase bg-white/20 px-3.5 py-1 rounded-full text-white mb-3">
-                  I WANT A RIDE
-                </span>
-                <span className="font-display text-2xl md:text-3xl font-black tracking-tight">
-                  Launch Rider App
-                </span>
+                Launch Rider App
               </a>
             </div>
 
             {/* Captain Card */}
-            <div className="p-1 bg-gradient-to-r from-[#0B1730]/10 to-[#0B1730]/5 rounded-2xl border border-[#0B1730]/20 transition-all hover:scale-[1.01] duration-200">
+            <div className="p-6 bg-slate-50/70 rounded-2xl border border-slate-100 flex flex-col gap-3 transition-all hover:scale-[1.01] duration-200">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-black tracking-widest uppercase bg-[#FFD645]/20 px-3 py-1 rounded-full text-[#0B1730]">
+                  I WANT TO EARN
+                </span>
+              </div>
+              <h4 className="font-display text-2xl font-black text-[#0B1730]">
+                Sancharoo Captain
+              </h4>
               <a
                 href="https://captain.sancharoo.in"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col items-center justify-center w-full py-8 px-6 text-center rounded-2xl bg-[#0B1730] hover:bg-[#15274d] text-white shadow-[0_12px_28px_rgba(11,23,48,0.3)] transition-all group"
+                className="flex items-center justify-center w-full h-14 rounded-xl text-base font-bold transition-all bg-[#0B1730] hover:bg-[#15274d] text-white shadow-[0_4px_12px_rgba(11,23,48,0.2)] hover:shadow-[0_6px_20px_rgba(11,23,48,0.3)]"
               >
-                <span className="text-xs font-black tracking-widest uppercase bg-white/10 px-3.5 py-1 rounded-full text-[#FFD645] mb-3">
-                  I WANT TO EARN
-                </span>
-                <span className="font-display text-2xl md:text-3xl font-black tracking-tight">
-                  Launch Captain App
-                </span>
+                Launch Captain App
               </a>
             </div>
 
             <div className="text-center bg-slate-50 rounded-xl p-4 border border-slate-100">
               <p className="text-[11px] text-slate-500 leading-relaxed font-semibold">
-                📲 <strong>Install App</strong>: Open either link on your mobile browser, tap the browser's menu button, and select <strong>"Add to Home Screen"</strong> to run it full-screen just like a native app.
+                📲 <strong>Install App</strong>: Open either link on your mobile
+                browser, tap the browser's menu button, and select{" "}
+                <strong>"Add to Home Screen"</strong> to run it full-screen just
+                like a native app.
               </p>
             </div>
           </div>

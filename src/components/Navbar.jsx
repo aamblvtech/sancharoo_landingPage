@@ -56,10 +56,7 @@ export default function Navbar() {
         </a>
 
         {/* Desktop Navigation */}
-        <nav
-          className="hidden md:flex items-center gap-8"
-          aria-label="Primary"
-        >
+        <nav className="hidden md:flex items-center gap-8" aria-label="Primary">
           {navigation.map((item) => (
             <a
               key={item.href}
@@ -201,11 +198,7 @@ export default function Navbar() {
           overflow-hidden
           transition-all
           duration-300
-          ${
-            isMenuOpen
-              ? "max-h-[400px] opacity-100 mt-3"
-              : "max-h-0 opacity-0"
-          }
+          ${isMenuOpen ? "max-h-[400px] opacity-100 mt-3" : "max-h-0 opacity-0"}
         `}
       >
         <nav

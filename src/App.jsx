@@ -30,7 +30,54 @@ export default function App() {
     };
   }, []);
 
-  const isPrivacyPage = currentPath === "/privacy" || currentPath === "/privacy/";
+  const isPrivacyPage =
+    currentPath === "/privacy" || currentPath === "/privacy/";
+
+  useEffect(() => {
+    if (!isPrivacyPage) {
+      document.title = "Sancharoo | Ride, Deliver and Earn";
+      const descMeta = document.querySelector('meta[name="description"]');
+      if (descMeta) {
+        descMeta.setAttribute(
+          "content",
+          "Book affordable bike and cab rides, send parcels, or earn as a Sancharoo captain with transparent pass-based pricing.",
+        );
+      }
+      const canonicalLink = document.querySelector('link[rel="canonical"]');
+      if (canonicalLink) {
+        canonicalLink.setAttribute("href", "https://sancharoo.com/");
+      }
+      // OG & Twitter tags
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle)
+        ogTitle.setAttribute("content", "Sancharoo | Ride, Deliver and Earn");
+      const ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc) {
+        ogDesc.setAttribute(
+          "content",
+          "Book affordable bike and cab rides, send parcels, or earn as a Sancharoo captain with transparent pass-based pricing.",
+        );
+      }
+      const ogUrl = document.querySelector('meta[property="og:url"]');
+      if (ogUrl) ogUrl.setAttribute("content", "https://sancharoo.com/");
+
+      const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+      if (twitterTitle)
+        twitterTitle.setAttribute(
+          "content",
+          "Sancharoo | Ride, Deliver and Earn",
+        );
+      const twitterDesc = document.querySelector(
+        'meta[name="twitter:description"]',
+      );
+      if (twitterDesc) {
+        twitterDesc.setAttribute(
+          "content",
+          "Book affordable bike and cab rides, send parcels, or earn as a Sancharoo captain with transparent pass-based pricing.",
+        );
+      }
+    }
+  }, [isPrivacyPage]);
 
   if (isPrivacyPage) {
     return <PrivacyPage />;

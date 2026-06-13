@@ -28,7 +28,8 @@ export default function EarnSection() {
           </h2>
           <p className="mt-6 text-base md:text-lg text-white/65 max-w-xl leading-relaxed">
             Pick the pass that fits your shift. Then drive as many rides as you
-            want — every rupee from every ride stays in your pocket. No commissions, no targets, no nonsense.
+            want — every rupee from every ride stays in your pocket. No
+            commissions, no targets, no nonsense.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10">
             <div className="rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-5">
@@ -136,7 +137,7 @@ export default function EarnSection() {
         >
           <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]">
             <img
-              alt="Sancharoo captain"
+              alt="Smiling Sancharoo Bike Taxi Captain in Bengaluru ready to drive passengers"
               className="absolute inset-0 w-full h-full object-cover"
               src="https://images.unsplash.com/photo-1777637802987-fb30ac38e58a?crop=entropy&amp;cs=srgb&amp;fm=jpg&amp;ixid=M3w4NjA1MTN8MHwxfHNlYXJjaHwzfHxoYXBweSUyMGluZGlhbiUyMGRyaXZlcnxlbnwwfHx8fDE3ODEwODgxMzR8MA&amp;ixlib=rb-4.1.0&amp;q=85"
             />

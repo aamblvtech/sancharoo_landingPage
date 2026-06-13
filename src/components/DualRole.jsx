@@ -24,8 +24,10 @@ export default function DualRole() {
           </h2>
           <p className="mt-6 text-base md:text-lg text-slate-600 max-w-xl leading-relaxed">
             With Sancharoo, you don't have to choose. Book a ride on your way to
-            work. Switch to <strong className="text-[#0B1730]">Captain mode</strong> on your ride home and earn from passengers headed your way. Same
-            app. Same wallet. Same you.
+            work. Switch to{" "}
+            <strong className="text-[#0B1730]">Captain mode</strong> on your
+            ride home and earn from passengers headed your way. Same app. Same
+            wallet. Same you.
           </p>
           <div className="mt-8 space-y-4">
             <div className="flex gap-4">
@@ -158,7 +160,6 @@ export default function DualRole() {
                 </div>
               </div>
               <div className="flex items-center gap-1 p-1 bg-slate-100 rounded-2xl">
-                
                 <div className="flex-1 py-2.5 text-center text-xs font-bold bg-[#0099FB] text-white rounded-xl shadow">
                   Captain
                 </div>

@@ -1,7 +1,7 @@
-import bikeTaxi from '../assets/bike-sancharoo.jpeg';
-import auto from '../assets/Auto.png';
-import parcel from '../assets/parcel.png';
-import cab from '../assets/cab.png';
+import bikeTaxi from "../assets/bike-sancharoo.jpeg";
+import auto from "../assets/Auto.png";
+import parcel from "../assets/parcel.png";
+import cab from "../assets/cab.png";
 export default function Services() {
   return (
     <section
@@ -73,7 +73,9 @@ export default function Services() {
                   Bike Taxi
                 </h3>
                 <p className="mt-2 text-white/65 max-w-sm">
-                  Book affordable bike rides in seconds and reach your destination faster with SancHaroO. Enjoy safe, reliable, and convenient travel whenever you need it.
+                  Book affordable bike rides in seconds and reach your
+                  destination faster with SancHaroO. Enjoy safe, reliable, and
+                  convenient travel whenever you need it.
                 </p>
               </div>
             </div>
@@ -120,9 +122,13 @@ export default function Services() {
                 <h3 className="font-display text-3xl md:text-4xl font-extrabold">
                   Auto
                 </h3>
-                <p className="mt-2 text-white/65
-                 max-w-sm">
-              Book an auto in seconds and enjoy transparent pricing, quick pickups, and smooth journeys every time.                </p>
+                <p
+                  className="mt-2 text-white/65
+                 max-w-sm"
+                >
+                  Book an auto in seconds and enjoy transparent pricing, quick
+                  pickups, and smooth journeys every time.{" "}
+                </p>
               </div>
             </div>
           </a>
@@ -169,7 +175,10 @@ export default function Services() {
                   Cab
                 </h3>
                 <p className="mt-2 text-white/65 max-w-sm">
-                 Book comfortable and reliable cab rides with SancHaroO. Whether it's a daily commute, airport transfer, business trip, or family outing, enjoy a safe and hassle-free journey every time.
+                  Book comfortable and reliable cab rides with SancHaroO.
+                  Whether it's a daily commute, airport transfer, business trip,
+                  or family outing, enjoy a safe and hassle-free journey every
+                  time.
                 </p>
               </div>
             </div>

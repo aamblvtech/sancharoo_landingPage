@@ -18,7 +18,9 @@ export default function Footer() {
           <div className="background-white col-span-2 md:col-span-4">
             <Logo />
             <p className="text-white/65 text-sm leading-relaxed max-w-xs mt-5">
-             A rider-friendly platform created by drivers and supported by leading tech innovators, building a stronger community through shared success.
+              A rider-friendly platform created by drivers and supported by
+              leading tech innovators, building a stronger community through
+              shared success.
             </p>
             <div className="mt-6 space-y-2.5 text-sm text-white/70">
               <div className="flex items-center gap-2.5">
@@ -38,7 +40,8 @@ export default function Footer() {
                   <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
                   <circle cx="12" cy="10" r="3"></circle>
                 </svg>
-               Hunter Rd, beside PADMAVATHI GARDENS, Ramannapet, Warangal, Telangana 506001
+                Hunter Rd, beside PADMAVATHI GARDENS, Ramannapet, Warangal,
+                Telangana 506001
               </div>
               <div className="flex items-center gap-2.5">
                 <svg
