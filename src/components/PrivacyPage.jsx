@@ -359,13 +359,10 @@ export default function PrivacyPage() {
         {/* Left Sidebar */}
         <aside className="w-full md-w-80-override bg-[#06101F] text-white flex flex-col border-r border-white/10 shrink-0">
           {/* Logo & Brand */}
-          <div className="p-6 border-b border-white/10 flex items-center justify-between">
+          <div className="p-6 border-b border-white/10 flex items-center">
             <a href="/" onClick={goHome} className="flex items-center gap-2">
               <Logo />
             </a>
-            <span className="text-[10px] uppercase font-bold tracking-widest bg-[#0099FB]/25 text-[#0099FB] px-2 py-0.5 rounded-full border border-[#0099FB]/20">
-              Admin Console
-            </span>
           </div>
 
           {/* Navigation Links */}
@@ -475,57 +472,6 @@ export default function PrivacyPage() {
                 </svg>
                 Back to Home
               </a>
-            </div>
-
-            {/* Mode Controls */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setMode("read")}
-                className={`px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-1.5 ${
-                  mode === "read"
-                    ? "bg-slate-100 text-slate-800"
-                    : "text-slate-500 hover:bg-slate-50"
-                }`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="15"
-                  height="15"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
-                  <circle cx="12" cy="12" r="3"></circle>
-                </svg>
-                Read Mode
-              </button>
-              <button
-                onClick={() => setMode("edit")}
-                className={`px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-1.5 ${
-                  mode === "edit"
-                    ? "bg-[#06101F] text-white shadow-lg"
-                    : "text-slate-500 hover:bg-slate-50"
-                }`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                </svg>
-                Edit Document (Admin)
-              </button>
             </div>
           </header>
 
