@@ -77,7 +77,7 @@ export default function EarnSection() {
               <div className="font-display text-2xl font-extrabold">24/7</div>
               <div className="text-xs text-white/60 mt-1">Flexible hours</div>
             </div>
-            <div className="rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-5">
+            {/* <div className="rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-5">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -98,7 +98,7 @@ export default function EarnSection() {
               <div className="text-xs text-white/60 mt-1">
                 Captains onboarded
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="mt-10 flex flex-wrap gap-4">
             <button

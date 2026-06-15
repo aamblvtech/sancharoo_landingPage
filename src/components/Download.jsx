@@ -1,3 +1,4 @@
+import "@fortawesome/fontawesome-free/css/all.min.css";
 export default function Download() {
   return (
     <section
@@ -35,72 +36,37 @@ export default function Download() {
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
-                  href="#"
-                  data-testid="download-android-btn"
-                  className="group inline-flex items-center gap-3 bg-[#0B1730] hover:bg-black text-white rounded-2xl px-6 h-16 transition-all hover:-translate-y-0.5"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-smartphone w-7 h-7"
-                    aria-hidden="true"
-                  >
-                    <rect
-                      width="14"
-                      height="20"
-                      x="5"
-                      y="2"
-                      rx="2"
-                      ry="2"
-                    ></rect>
-                    <path d="M12 18h.01"></path>
-                  </svg>
-                  <div className="text-left">
-                    <div className="text-[10px] uppercase tracking-wider text-white/70">
-                      Get it on
-                    </div>
-                    <div className="font-display text-lg font-bold leading-none mt-0.5">
-                      Google Play
-                    </div>
-                  </div>
-                </a>
+  href="#"
+  className="group inline-flex items-center gap-4 bg-[#0B1730] hover:bg-black text-white rounded-2xl px-6 h-16 transition-all"
+>
+  <i className="fa-brands fa-google-play text-3xl"></i>
+
+  <div className="text-left">
+    <div className="text-[10px] uppercase tracking-wider text-white/70">
+      Coming Soon On
+    </div>
+
+    <div className="font-bold text-xl">
+      Google Play
+    </div>
+  </div>
+</a>
                 <a
-                  href="#"
-                  data-testid="download-ios-btn"
-                  className="group inline-flex items-center gap-3 bg-white text-[#0B1730] rounded-2xl px-6 h-16 transition-all hover:-translate-y-0.5 hover:shadow-xl"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-apple w-7 h-7"
-                    aria-hidden="true"
-                  >
-                    <path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"></path>
-                    <path d="M10 2c1 .5 2 2 2 5"></path>
-                  </svg>
-                  <div className="text-left">
-                    <div className="text-[10px] uppercase tracking-wider text-slate-500">
-                      Download on the
-                    </div>
-                    <div className="font-display text-lg font-bold leading-none mt-0.5">
-                      App Store
-                    </div>
-                  </div>
-                </a>
+  href="#"
+  className="group inline-flex items-center gap-4 bg-white text-[#0B1730] rounded-2xl px-6 h-16 hover:shadow-xl transition-all"
+>
+  <i className="fa-brands fa-app-store-ios text-3xl"></i>
+
+  <div className="text-left">
+    <div className="text-[10px] uppercase tracking-wider text-slate-500">
+      Coming Soon On
+    </div>
+
+    <div className="font-bold text-xl">
+      App Store
+    </div>
+  </div>
+</a>
               </div>
               <div className="mt-8 flex items-center gap-3 text-white/90">
                 <div className="flex">

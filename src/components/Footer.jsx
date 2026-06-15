@@ -226,7 +226,7 @@ export default function Footer() {
                   onClick={(e) => navigateToPrivacy(e, "terms-user")}
                   className="text-sm text-white/65 hover:text-[#0099FB] transition-colors"
                 >
-                  Terms & Conditions-User
+                  Terms &amp; Conditions-User
                 </a>
               </li>
               <li>
@@ -235,7 +235,7 @@ export default function Footer() {
                   onClick={(e) => navigateToPrivacy(e, "terms-captain")}
                   className="text-sm text-white/65 hover:text-[#0099FB] transition-colors"
                 >
-                  Terms & Conditions-Captain
+                  Terms &amp; Conditions-Captain
                 </a>
               </li>
               <li>
@@ -262,7 +262,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pt-8">
           <div className="text-xs text-white/50">
             ©<span style={{ display: "contents" }}>2026</span>
-            Sancharoo Mobility Pvt. Ltd. All rights reserved.
+            SancHaroO Powered By Aamblv Technologies Private limited.
           </div>
           <div className="flex items-center gap-3">
             <a

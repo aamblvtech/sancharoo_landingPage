@@ -35,7 +35,7 @@ export default function PassPlans() {
               <path d="M5 18H3"></path>
             </svg>
             <span className="text-xs font-bold tracking-wide uppercase text-[#0B1730]">
-              The Sancharoo Difference
+              The SancHaroO Difference
             </span>
           </div>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0B1730] tracking-tight leading-tight">
@@ -60,7 +60,7 @@ export default function PassPlans() {
             <div className="mt-3 flex items-baseline gap-1">
               <span className="text-2xl font-bold text-slate-400">₹</span>
               <span className="font-display text-6xl font-extrabold tracking-tight">
-                30
+                32
               </span>
               <span className="text-base font-semibold text-slate-500">
                 /day
@@ -178,7 +178,7 @@ export default function PassPlans() {
             <div className="mt-3 flex items-baseline gap-1">
               <span className="text-2xl font-bold text-white/70">₹</span>
               <span className="font-display text-6xl font-extrabold tracking-tight">
-                179
+                250
               </span>
               <span className="text-base font-semibold text-white/70">
                 /week
@@ -287,7 +287,7 @@ export default function PassPlans() {
             <div className="mt-3 flex items-baseline gap-1">
               <span className="text-2xl font-bold text-slate-400">₹</span>
               <span className="font-display text-6xl font-extrabold tracking-tight">
-                599
+                900
               </span>
               <span className="text-base font-semibold text-slate-500">
                 /month

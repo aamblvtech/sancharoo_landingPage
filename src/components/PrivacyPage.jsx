@@ -10,8 +10,67 @@ const fallbackTemplates = {
   "privacy-captain": `# Privacy Policy - Captain\n\nThis Privacy Policy explains how Sancharoo handles the personal and location data of our Captains (drivers).\n\n### 1. Background Location Tracking\nTo operate efficiently, the Sancharoo Captain app collects real-time location data:\n* **Background Tracking:** We collect location data when the Captain app is open and your status is set to "Active" or "Online," even if the app is minimized or running in the background.\n* **Purpose:** This is essential to assign nearby passenger bookings, calculate accurate routes, and ensure user safety. Location tracking stops when you go offline.\n\n### 2. Documentation and Verifications\nWe collect and store sensitive driver information to comply with safety regulations:\n* Government-issued identification (Aadhaar, PAN, etc.).\n* Driver's license and vehicle registration (RC) details.\n* Background verification certificates and vehicle insurance records.\n\n### 3. Sharing with Passengers\nWhen you accept a booking, we share your name, photo, vehicle license plate number, vehicle model, real-time location, and contact number with the passenger to ensure they can identify your vehicle.`,
 };
 
+const documentSources = {
+  "terms-user": "/User-Terms&Conditions.html",
+  "terms-captain": "/Captain-Terms&Conditions.html",
+  "privacy-user": "/User-PrivacyPolicy.html",
+  "privacy-captain": "/Captain-PrivacyPolicy.html",
+};
+
+const POLICY_CACHE_VERSION = "v2";
+const getPolicyStorageKey = (id) =>
+  `sancharoo_policy_${POLICY_CACHE_VERSION}_${id}`;
+
+const htmlToMarkdown = (html) => {
+  const parsed = new DOMParser().parseFromString(html, "text/html");
+  const container = parsed.querySelector(".container") || parsed.body;
+
+  const cleanText = (value) => value.replace(/\s+/g, " ").trim();
+  const inlineText = (element) =>
+    Array.from(element.childNodes)
+      .map((node) => {
+        if (node.nodeType === Node.TEXT_NODE) return node.textContent;
+        if (node.nodeType !== Node.ELEMENT_NODE) return "";
+        const text = cleanText(node.textContent);
+        return node.tagName.toLowerCase() === "strong" ? `**${text}**` : text;
+      })
+      .join(" ")
+      .replace(/\s+([.,:;!?])/g, "$1")
+      .replace(/\s+/g, " ")
+      .trim();
+
+  const convertElement = (element) => {
+    const tag = element.tagName.toLowerCase();
+
+    switch (tag) {
+      case "h1":
+        return `# ${cleanText(element.textContent)}`;
+      case "h2":
+        return `## ${cleanText(element.textContent)}`;
+      case "h3":
+        return `### ${cleanText(element.textContent)}`;
+      case "p":
+        return inlineText(element);
+      case "ul":
+        return Array.from(element.children)
+          .filter((child) => child.tagName.toLowerCase() === "li")
+          .map((item) => `* ${inlineText(item)}`)
+          .join("\n");
+      default:
+        return Array.from(element.children).map(convertElement).filter(Boolean);
+    }
+  };
+
+  return Array.from(container.children)
+    .flatMap(convertElement)
+    .filter(Boolean)
+    .join("\n\n")
+    .trim();
+};
+
 export default function PrivacyPage() {
   const [documents, setDocuments] = useState({});
+  const [originalDocuments, setOriginalDocuments] = useState({});
   const [activeTab, setActiveTab] = useState("terms-user"); // terms-user, terms-captain, privacy-user, privacy-captain
   const [mode, setMode] = useState("read"); // read, edit
   const [searchText, setSearchText] = useState("");
@@ -20,28 +79,44 @@ export default function PrivacyPage() {
 
   // Initialize and load documents
   useEffect(() => {
-    // Parse term.md content if available, otherwise use fallbacks
-    const parsed = parseMarkdown(termContent);
-    const initialDocs = {};
-
     const ids = [
       "terms-user",
       "terms-captain",
       "privacy-user",
       "privacy-captain",
     ];
-    ids.forEach((id) => {
-      // Check if modified version exists in localStorage
-      const local = localStorage.getItem(`sancharoo_policy_${id}`);
-      if (local) {
-        initialDocs[id] = local;
-      } else {
-        const parsedDoc = parsed.find((d) => d.id === id);
-        initialDocs[id] = parsedDoc ? parsedDoc.rawText : fallbackTemplates[id];
-      }
-    });
+    let cancelled = false;
 
-    setDocuments(initialDocs);
+    const loadDocuments = async () => {
+      const parsed = parseMarkdown(termContent);
+      const entries = await Promise.all(
+        ids.map(async (id) => {
+          try {
+            const response = await fetch(documentSources[id]);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            return [id, htmlToMarkdown(await response.text())];
+          } catch {
+            const parsedDoc = parsed.find((document) => document.id === id);
+            return [id, parsedDoc ? parsedDoc.rawText : fallbackTemplates[id]];
+          }
+        }),
+      );
+
+      if (cancelled) return;
+
+      const originals = Object.fromEntries(entries);
+      const initialDocs = Object.fromEntries(
+        ids.map((id) => [
+          id,
+          localStorage.getItem(getPolicyStorageKey(id)) || originals[id],
+        ]),
+      );
+
+      setOriginalDocuments(originals);
+      setDocuments(initialDocs);
+    };
+
+    loadDocuments();
 
     // Set initial tab from URL query parameter
     const params = new URLSearchParams(window.location.search);
@@ -49,6 +124,10 @@ export default function PrivacyPage() {
     if (tabParam && ids.includes(tabParam)) {
       setActiveTab(tabParam);
     }
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   // Sync edit area when active tab or mode changes
@@ -167,7 +246,7 @@ export default function PrivacyPage() {
   const handleSave = () => {
     const updatedDocs = { ...documents, [activeTab]: editedContent };
     setDocuments(updatedDocs);
-    localStorage.setItem(`sancharoo_policy_${activeTab}`, editedContent);
+    localStorage.setItem(getPolicyStorageKey(activeTab), editedContent);
     showToast("Document saved and updated successfully!");
     setMode("read");
   };
@@ -178,15 +257,12 @@ export default function PrivacyPage() {
         "Are you sure you want to revert this document to original settings?",
       )
     ) {
-      const parsed = parseMarkdown(termContent);
-      const parsedDoc = parsed.find((d) => d.id === activeTab);
-      const original = parsedDoc
-        ? parsedDoc.rawText
-        : fallbackTemplates[activeTab];
+      const original =
+        originalDocuments[activeTab] || fallbackTemplates[activeTab];
 
       const updatedDocs = { ...documents, [activeTab]: original };
       setDocuments(updatedDocs);
-      localStorage.removeItem(`sancharoo_policy_${activeTab}`);
+      localStorage.removeItem(getPolicyStorageKey(activeTab));
       setEditedContent(original);
       showToast("Document reverted to default template.", "info");
     }
@@ -209,70 +285,96 @@ export default function PrivacyPage() {
   const renderFormattedContent = (markdown, keyword) => {
     if (!markdown) return "";
 
-    // 1. Separate the first title line (e.g. # Title) so we don't render it in the body again
     const lines = markdown.split("\n");
     const bodyLines = lines[0].startsWith("# ") ? lines.slice(1) : lines;
-    let text = bodyLines.join("\n").trim();
+    const escapedKeyword = keyword
+      .trim()
+      .replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const keywordRegex = escapedKeyword
+      ? new RegExp(`(${escapedKeyword})`, "gi")
+      : null;
 
-    // 2. Perform search highlights if keyword is provided
-    if (keyword && keyword.trim() !== "") {
-      const escapedKeyword = keyword.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
-      const regex = new RegExp(`(${escapedKeyword})`, "gi");
-      text = text.replace(regex, "===MARK===$1===ENDMARK===");
-    }
+    const formatInline = (value) => {
+      let formatted = value;
+      if (keywordRegex) {
+        formatted = formatted.replace(
+          keywordRegex,
+          "===MARK===$1===ENDMARK===",
+        );
+      }
 
-    // 3. Escape HTML
-    text = text
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;");
+      return formatted
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(
+          /\*\*(.*?)\*\*/g,
+          '<strong class="font-semibold text-slate-900">$1</strong>',
+        )
+        .replace(
+          /===MARK===/g,
+          '<mark class="bg-[#0099FB]/20 text-[#0B1730] font-semibold px-0.5 rounded">',
+        )
+        .replace(/===ENDMARK===/g, "</mark>");
+    };
 
-    // 4. Restore highlighter marks
-    text = text
-      .replace(
-        /===MARK===/g,
-        '<mark class="bg-[#0099FB]/25 text-[#0B1730] font-semibold px-0.5 rounded">',
-      )
-      .replace(/===ENDMARK===/g, "</mark>");
+    const output = [];
+    let paragraph = [];
+    let listItems = [];
 
-    // 5. Convert Headers (### and ##)
-    text = text.replace(
-      /^### (.*?)$/gm,
-      '<h3 class="text-base font-bold text-slate-800 mt-6 mb-3 font-display">$1</h3>',
-    );
-    text = text.replace(
-      /^## (.*?)$/gm,
-      '<h2 class="text-lg font-bold text-slate-800 mt-8 mb-4 font-display">$1</h2>',
-    );
+    const flushParagraph = () => {
+      if (!paragraph.length) return;
+      output.push(
+        `<p class="text-[15px] text-slate-600 leading-7 mb-5">${formatInline(
+          paragraph.join(" "),
+        )}</p>`,
+      );
+      paragraph = [];
+    };
 
-    // 6. Bold inline text
-    text = text.replace(
-      /\*\*(.*?)\*\*/g,
-      '<strong class="font-bold text-slate-900">$1</strong>',
-    );
+    const flushList = () => {
+      if (!listItems.length) return;
+      output.push(
+        `<ul class="mb-6 space-y-2.5">${listItems
+          .map(
+            (item) =>
+              `<li class="relative pl-6 text-[15px] text-slate-600 leading-7 before:absolute before:left-1 before:top-[11px] before:w-1.5 before:h-1.5 before:bg-[#0099FB] before:rounded-full">${formatInline(item)}</li>`,
+          )
+          .join("")}</ul>`,
+      );
+      listItems = [];
+    };
 
-    // 7. Render bullet points
-    // Splitting by paragraphs and identifying bullet blocks
-    const paragraphs = text.split(/\n\n+/);
-    return paragraphs
-      .map((para) => {
-        const trimmed = para.trim();
-        if (trimmed.startsWith("* ") || trimmed.startsWith("- ")) {
-          const items = trimmed.split(/\n[*+-]\s+/);
-          const listHtml = items
-            .map((item) => {
-              const cleaned = item.replace(/^[*+-]\s+/, "").trim();
-              return `<li class="relative pl-5 text-sm text-slate-600 mb-2 leading-relaxed before:absolute before:left-1.5 before:top-2 before:w-1.5 before:h-1.5 before:bg-[#0099FB] before:rounded-full">${cleaned}</li>`;
-            })
-            .join("");
-          return `<ul class="my-3 space-y-1">${listHtml}</ul>`;
-        }
-        if (trimmed.startsWith("<h")) {
-          return trimmed; // Headers already converted
-        }
-        return `<p class="text-slate-600 text-sm leading-relaxed mb-4">${trimmed}</p>`;
-      })
-      .join("");
+    bodyLines.forEach((line) => {
+      const trimmed = line.trim();
+
+      if (!trimmed) {
+        flushParagraph();
+        flushList();
+      } else if (trimmed.startsWith("### ")) {
+        flushParagraph();
+        flushList();
+        output.push(
+          `<h3 class="text-base font-bold text-slate-800 mt-7 mb-3 font-display">${formatInline(trimmed.slice(4))}</h3>`,
+        );
+      } else if (trimmed.startsWith("## ")) {
+        flushParagraph();
+        flushList();
+        output.push(
+          `<h2 class="text-xl font-extrabold text-slate-900 mt-10 mb-4 pb-2 border-b border-slate-100 font-display">${formatInline(trimmed.slice(3))}</h2>`,
+        );
+      } else if (/^[*-]\s+/.test(trimmed)) {
+        flushParagraph();
+        listItems.push(trimmed.replace(/^[*-]\s+/, ""));
+      } else {
+        flushList();
+        paragraph.push(trimmed);
+      }
+    });
+
+    flushParagraph();
+    flushList();
+    return output.join("");
   };
 
   // Meta Info based on activeTab
@@ -303,17 +405,70 @@ export default function PrivacyPage() {
   const meta = getDocumentMeta();
 
   return (
-    <div className="min-h-screen bg-[#F1F6FB] flex flex-col font-sans relative antialiased">
+    <div className="legal-page bg-[#F1F6FB] font-sans antialiased">
       <style>{`
-        /* Desktop Sidebar Width Override */
-        @media (min-width: 768px) {
-          .md-w-80-override {
-            width: 20rem !important;
-          }
+        .legal-page {
+          height: 100vh;
+          height: 100dvh;
+          overflow: hidden;
+          position: relative;
         }
-        /* Layout and Scrolling Overrides */
-        .h-screen-override {
-          height: 100vh !important;
+        .legal-page-shell {
+          display: flex;
+          height: 100%;
+          min-height: 0;
+          overflow: hidden;
+        }
+        .legal-sidebar {
+          display: flex;
+          flex: 0 0 20rem;
+          flex-direction: column;
+          height: 100%;
+          min-height: 0;
+          overflow: hidden;
+        }
+        .legal-sidebar-nav {
+          flex: 1 1 auto;
+          min-height: 0;
+          overflow: hidden;
+        }
+        .legal-content {
+          display: flex;
+          flex: 1 1 auto;
+          flex-direction: column;
+          min-width: 0;
+          min-height: 0;
+          overflow: hidden;
+        }
+        .legal-content-scroll {
+          flex: 1 1 auto;
+          min-height: 0;
+          overflow-x: hidden;
+          overflow-y: auto;
+          overscroll-behavior: contain;
+          scrollbar-gutter: stable;
+        }
+        @media (max-width: 767px) {
+          .legal-page {
+            height: auto;
+            min-height: 100dvh;
+            overflow: visible;
+          }
+          .legal-page-shell {
+            display: block;
+            height: auto;
+            overflow: visible;
+          }
+          .legal-sidebar {
+            width: 100%;
+            height: auto;
+            overflow: visible;
+          }
+          .legal-sidebar-nav,
+          .legal-content,
+          .legal-content-scroll {
+            overflow: visible;
+          }
         }
         .bg-f8fafc-override {
           background-color: #f8fafc !important;
@@ -329,6 +484,26 @@ export default function PrivacyPage() {
         }
         .shadow-blue-toast-override {
           box-shadow: 0 15px 30px rgba(0, 153, 251, 0.25) !important;
+        }
+        .legal-sidebar-heading {
+          color: rgba(255, 255, 255, 0.72) !important;
+        }
+        .legal-sidebar-link {
+          color: #f8fafc !important;
+          border: 1px solid none;
+        }
+        .legal-sidebar-link:hover {
+          color: #ffffff !important;
+          background: rgba(255, 255, 255, 0.12);
+          border-color: rgba(0, 153, 251, 0.55);
+        }
+        .legal-sidebar-link-active {
+          color: #ffffff !important;
+          background: #0099fb;
+          border-color: #0099fb;
+        }
+        .legal-sidebar-subtitle {
+          color: rgba(255, 255, 255, 0.72) !important;
         }
       `}</style>
 
@@ -355,9 +530,9 @@ export default function PrivacyPage() {
       )}
 
       {/* Main Console Container */}
-      <div className="flex-1 flex flex-col md:flex-row h-screen-override overflow-hidden">
+      <div className="legal-page-shell">
         {/* Left Sidebar */}
-        <aside className="w-full md-w-80-override bg-[#06101F] text-white flex flex-col border-r border-white/10 shrink-0">
+        <aside className="legal-sidebar w-full bg-[#06101F] text-white border-r border-white/10">
           {/* Logo & Brand */}
           <div className="p-6 border-b border-white/10 flex items-center">
             <a href="/" onClick={goHome} className="flex items-center gap-2">
@@ -366,73 +541,77 @@ export default function PrivacyPage() {
           </div>
 
           {/* Navigation Links */}
-          <div className="flex-grow p-4 space-y-6 overflow-y-auto">
+          <div className="legal-sidebar-nav p-4 space-y-6">
             <div>
-              <div className="text-xs font-semibold text-white/40 uppercase tracking-wider px-3 mb-3">
+              <div className="legal-sidebar-heading text-xs font-semibold uppercase tracking-wider px-3 mb-3">
                 Terms and Conditions
               </div>
               <nav className="space-y-1.5">
                 <button
                   onClick={() => navigateToTab("terms-user")}
-                  className={`w-full text-left px-4 py-3 rounded-xl flex flex-col gap-0.5 transition-all ${
+                  className={`legal-sidebar-link w-full text-left px-4 py-3 rounded-xl flex flex-col gap-0.5 transition-all ${
                     activeTab === "terms-user"
-                      ? "bg-[#0099FB] text-white shadow-blue-btn-override"
-                      : "text-white/75 hover:bg-white/5 hover:text-white"
+                      ? "legal-sidebar-link-active shadow-blue-btn-override"
+                      : ""
                   }`}
                 >
                   <span className="text-sm font-bold">
                     Terms &amp; Conditions-User
                   </span>
-                  <span className="text-[10px] text-white/50">
+                  <span className="legal-sidebar-subtitle text-[10px]">
                     For Passengers
                   </span>
                 </button>
                 <button
                   onClick={() => navigateToTab("terms-captain")}
-                  className={`w-full text-left px-4 py-3 rounded-xl flex flex-col gap-0.5 transition-all ${
+                  className={`legal-sidebar-link w-full text-left px-4 py-3 rounded-xl flex flex-col gap-0.5 transition-all ${
                     activeTab === "terms-captain"
-                      ? "bg-[#0099FB] text-white shadow-blue-btn-override"
-                      : "text-white/75 hover:bg-white/5 hover:text-white"
+                      ? "legal-sidebar-link-active shadow-blue-btn-override"
+                      : ""
                   }`}
                 >
                   <span className="text-sm font-bold">
                     Terms &amp; Conditions-Captain
                   </span>
-                  <span className="text-[10px] text-white/50">For Drivers</span>
+                  <span className="legal-sidebar-subtitle text-[10px]">
+                    For Drivers
+                  </span>
                 </button>
               </nav>
             </div>
 
             <div>
-              <div className="text-xs font-semibold text-white/40 uppercase tracking-wider px-3 mb-3">
+              <div className="legal-sidebar-heading text-xs font-semibold uppercase tracking-wider px-3 mb-3">
                 Privacy Policies
               </div>
               <nav className="space-y-1.5">
                 <button
                   onClick={() => navigateToTab("privacy-user")}
-                  className={`w-full text-left px-4 py-3 rounded-xl flex flex-col gap-0.5 transition-all ${
+                  className={`legal-sidebar-link w-full text-left px-4 py-3 rounded-xl flex flex-col gap-0.5 transition-all ${
                     activeTab === "privacy-user"
-                      ? "bg-[#0099FB] text-white shadow-blue-btn-override"
-                      : "text-white/75 hover:bg-white/5 hover:text-white"
+                      ? "legal-sidebar-link-active shadow-blue-btn-override"
+                      : ""
                   }`}
                 >
                   <span className="text-sm font-bold">Privacy Policy-User</span>
-                  <span className="text-[10px] text-white/50">
+                  <span className="legal-sidebar-subtitle text-[10px]">
                     For Passengers
                   </span>
                 </button>
                 <button
                   onClick={() => navigateToTab("privacy-captain")}
-                  className={`w-full text-left px-4 py-3 rounded-xl flex flex-col gap-0.5 transition-all ${
+                  className={`legal-sidebar-link w-full text-left px-4 py-3 rounded-xl flex flex-col gap-0.5 transition-all ${
                     activeTab === "privacy-captain"
-                      ? "bg-[#0099FB] text-white shadow-blue-btn-override"
-                      : "text-white/75 hover:bg-white/5 hover:text-white"
+                      ? "legal-sidebar-link-active shadow-blue-btn-override"
+                      : ""
                   }`}
                 >
                   <span className="text-sm font-bold">
                     Privacy Policy-Captain
                   </span>
-                  <span className="text-[10px] text-white/50">For Drivers</span>
+                  <span className="legal-sidebar-subtitle text-[10px]">
+                    For Drivers
+                  </span>
                 </button>
               </nav>
             </div>
@@ -447,7 +626,7 @@ export default function PrivacyPage() {
         </aside>
 
         {/* Right Content Viewport */}
-        <main className="flex-1 flex flex-col bg-f8fafc-override overflow-hidden">
+        <main className="legal-content bg-f8fafc-override">
           {/* Header Panel */}
           <header className="h-16 md:h-20 border-b border-slate-200 bg-white px-6 flex items-center justify-between shrink-0">
             <div className="flex items-center gap-4">
@@ -504,39 +683,10 @@ export default function PrivacyPage() {
                 </span>
               </div>
             </div>
-
-            {/* Keyword Search (Only in Read Mode) */}
-            {mode === "read" && (
-              <div className="relative w-full sm:w-64">
-                <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                  </svg>
-                </span>
-                <input
-                  type="text"
-                  placeholder="Search in document..."
-                  value={searchText}
-                  onChange={(e) => setSearchText(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-[#0099FB] focus:bg-white transition-all text-slate-700"
-                />
-              </div>
-            )}
           </div>
 
           {/* Work Area */}
-          <div className="flex-1 overflow-y-auto p-6 md:p-8">
+          <div className="legal-content-scroll p-6 md:p-8">
             <div className="max-w-4xl mx-auto bg-white border border-slate-200/80 rounded-2xl shadow-sm overflow-hidden">
               {mode === "read" ? (
                 /* Read Layout */

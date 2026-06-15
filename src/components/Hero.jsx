@@ -54,10 +54,9 @@ export default function Hero() {
             .
           </h1>
           <p className="mt-6 text-base md:text-lg text-slate-700 max-w-xl leading-relaxed">
-            Book a Bike, Cab or Parcel in minutes. Or flip the switch — recharge
-            a Captain Pass for the day and keep{" "}
+            Book a Ride with Zero Commission. Keep{" "}
             <strong className="text-slate-950">100% of every fare </strong>
-            you earn.
+           you earn.
           </p>
           {/* <div className="mt-8 flex flex-wrap items-center gap-6">
             <div className="flex items-center gap-3">
