@@ -198,6 +198,8 @@ export default function Navbar() {
           overflow-hidden
           transition-all
           duration-300
+          bg-white 
+          rounded-3xl
           ${isMenuOpen ? "max-h-[400px] opacity-100 mt-3" : "max-h-0 opacity-0"}
         `}
       >

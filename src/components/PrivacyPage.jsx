@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import termContent from "../../term.md?raw";
-import Logo from "./Logo";
+import Logo2 from "./Logo2";
 
 // Fallback legal templates if term.md is empty
 const fallbackTemplates = {
@@ -536,7 +536,7 @@ export default function PrivacyPage() {
           {/* Logo & Brand */}
           <div className="p-6 border-b border-white/10 flex items-center">
             <a href="/" onClick={goHome} className="flex items-center gap-2">
-              <Logo />
+              <Logo2 />
             </a>
           </div>
 

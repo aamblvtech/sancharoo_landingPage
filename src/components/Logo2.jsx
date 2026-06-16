@@ -1,4 +1,4 @@
-import logo from "../assets/Sancharoo.png";
+import logo from "../assets/whitelogo.png";
 
 export default function Logo() {
   return (

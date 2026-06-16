@@ -1,4 +1,4 @@
-import Logo from "./Logo";
+import Logo2 from "./Logo2";
 
 export default function Footer() {
   const navigateToPrivacy = (e, tab) => {
@@ -16,7 +16,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-12 gap-10 md:gap-12 pb-14 border-b border-white/10">
           <div className="background-white col-span-2 md:col-span-4">
-            <Logo />
+            <Logo2 />
             <p className="text-white/65 text-sm leading-relaxed max-w-xs mt-5">
               A rider-friendly platform created by drivers and supported by
               leading tech innovators, building a stronger community through
