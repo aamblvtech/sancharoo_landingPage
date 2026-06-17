@@ -160,7 +160,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/captain-support"
                   className="text-sm text-white/65 hover:text-[#0099FB] transition-colors"
                 >
                   Captain support
@@ -207,7 +207,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/contact"
                   className="text-sm text-white/65 hover:text-[#0099FB] transition-colors"
                 >
                   Contact

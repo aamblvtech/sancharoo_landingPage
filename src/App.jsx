@@ -9,7 +9,9 @@ import Navbar from "./components/Navbar";
 import PassPlans from "./components/PassPlans";
 import Services from "./components/Services";
 import WhyOffer from "./components/WhyOffer";
+import Support from "./components/CaptainSupport";
 import PrivacyPage from "./components/PrivacyPage";
+import ContactUs from "./components/ContactUs";
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
@@ -81,6 +83,13 @@ export default function App() {
 
   if (isPrivacyPage) {
     return <PrivacyPage />;
+  }
+
+  if (currentPath === "/captain-support") {
+    return <Support />;
+  }
+  if (currentPath === "/contact") {
+    return <ContactUs />;
   }
 
   return (
