@@ -3,9 +3,7 @@ import {
   BookOpen,
   PlayCircle,
   Users,
-  Headphones,
   ChevronRight,
-  MessageCircle,
   Phone,
   Search,
   X,
@@ -73,24 +71,6 @@ const menuItems = [
       { title: "Share your use cases", time: "Popular" },
       { title: "Feature requests & feedback", time: "Active" },
       { title: "Bug reports", time: "Active" },
-    ],
-  },
-  {
-    id: "contact-support",
-    icon: Headphones,
-    iconBg: "#ECFDF5",
-    iconColor: "#059669",
-    accentBorder: "#A7F3D0",
-    title: "Contact Support",
-    subtitle: "Talk to our support team",
-    badge: "~2 min wait",
-    badgeBg: "#ECFDF5",
-    badgeColor: "#065F46",
-    articles: [
-      { title: "Live chat with an agent", time: "Online now" },
-      { title: "Submit a support ticket", time: "24h response" },
-      { title: "Schedule a call", time: "Book slot" },
-      { title: "Email support team", time: "support@app.com" },
     ],
   },
 ];
@@ -258,189 +238,11 @@ function ResourceModal({ item, onClose }) {
   );
 }
 
-// ─── Contact Modal ────────────────────────────────────────────────────────────
-
-function ContactModal({ onClose }) {
-  const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [errors, setErrors] = useState({});
-
-  const validate = () => {
-    const e = {};
-    if (!form.name.trim()) e.name = "Name is required";
-    if (!form.email.trim() || !/\S+@\S+\.\S+/.test(form.email)) e.email = "Valid email required";
-    if (!form.message.trim()) e.message = "Please describe your issue";
-    return e;
-  };
-
-  const handleSubmit = () => {
-    const e = validate();
-    if (Object.keys(e).length > 0) { setErrors(e); return; }
-    setSubmitted(true);
-  };
-
-  const inputStyle = (key) => ({
-    width: "100%",
-    padding: "11px 14px",
-    border: `1.5px solid ${errors[key] ? "#FCA5A5" : "#E2E8F0"}`,
-    borderRadius: 10,
-    fontSize: 14,
-    color: "#0F172A",
-    outline: "none",
-    boxSizing: "border-box",
-    background: errors[key] ? "#FFF5F5" : "#fff",
-    fontFamily: "inherit",
-  });
-
-  return (
-    <div
-      onClick={onClose}
-      style={{
-        position: "fixed",
-        inset: 0,
-        background: "rgba(15,23,42,0.5)",
-        backdropFilter: "blur(4px)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        zIndex: 1000,
-        padding: 24,
-      }}
-    >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        style={{
-          background: "#fff",
-          borderRadius: 24,
-          width: "100%",
-          maxWidth: 480,
-          padding: "32px 32px 28px",
-          boxShadow: "0 24px 64px rgba(0,0,0,0.18)",
-        }}
-      >
-        {submitted ? (
-          <div style={{ textAlign: "center", padding: "16px 0 8px" }}>
-            <div
-              style={{
-                width: 64,
-                height: 64,
-                background: "#ECFDF5",
-                borderRadius: "50%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                margin: "0 auto 20px",
-              }}
-            >
-              <CheckCircle size={32} color="#10B981" />
-            </div>
-            <h4 style={{ margin: "0 0 8px", fontSize: 20, fontWeight: 700, color: "#0F172A" }}>Message sent!</h4>
-            <p style={{ margin: "0 0 28px", fontSize: 14, color: "#64748B", lineHeight: 1.6 }}>
-              We'll get back to you at <strong style={{ color: "#1E3A8A" }}>{form.email}</strong> within 2 hours.
-            </p>
-            <button
-              onClick={onClose}
-              style={{
-                padding: "11px 32px",
-                background: "#1E3A8A",
-                color: "#fff",
-                border: "none",
-                borderRadius: 10,
-                fontSize: 14,
-                fontWeight: 600,
-                cursor: "pointer",
-              }}
-            >
-              Done
-            </button>
-          </div>
-        ) : (
-          <>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
-              <div>
-                <h3 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: "#0F172A" }}>Contact Support</h3>
-                <p style={{ margin: "4px 0 0", fontSize: 13, color: "#64748B" }}>Avg. response time: 2 minutes</p>
-              </div>
-              <button
-                onClick={onClose}
-                style={{
-                  background: "#F8FAFC",
-                  border: "1px solid #E2E8F0",
-                  borderRadius: 8,
-                  padding: 7,
-                  cursor: "pointer",
-                  display: "flex",
-                }}
-              >
-                <X size={16} color="#64748B" />
-              </button>
-            </div>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              {[
-                { label: "Your name", key: "name", type: "text", placeholder: "Jane Smith" },
-                { label: "Email address", key: "email", type: "email", placeholder: "jane@company.com" },
-              ].map(({ label, key, type, placeholder }) => (
-                <div key={key}>
-                  <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#374151", marginBottom: 6 }}>
-                    {label}
-                  </label>
-                  <input
-                    type={type}
-                    placeholder={placeholder}
-                    value={form[key]}
-                    onChange={(e) => { setForm({ ...form, [key]: e.target.value }); setErrors({ ...errors, [key]: null }); }}
-                    style={inputStyle(key)}
-                  />
-                  {errors[key] && <p style={{ margin: "4px 0 0", fontSize: 12, color: "#EF4444" }}>{errors[key]}</p>}
-                </div>
-              ))}
-              <div>
-                <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#374151", marginBottom: 6 }}>
-                  How can we help?
-                </label>
-                <textarea
-                  placeholder="Describe your issue in detail..."
-                  rows={4}
-                  value={form.message}
-                  onChange={(e) => { setForm({ ...form, message: e.target.value }); setErrors({ ...errors, message: null }); }}
-                  style={{ ...inputStyle("message"), resize: "vertical", lineHeight: 1.6 }}
-                />
-                {errors.message && <p style={{ margin: "4px 0 0", fontSize: 12, color: "#EF4444" }}>{errors.message}</p>}
-              </div>
-            </div>
-
-            <button
-              onClick={handleSubmit}
-              style={{
-                marginTop: 20,
-                width: "100%",
-                padding: "13px",
-                background: "#1E3A8A",
-                color: "#fff",
-                border: "none",
-                borderRadius: 12,
-                fontSize: 14,
-                fontWeight: 600,
-                cursor: "pointer",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = "#1E40AF")}
-              onMouseLeave={(e) => (e.currentTarget.style.background = "#1E3A8A")}
-            >
-              Send message
-            </button>
-          </>
-        )}
-      </div>
-    </div>
-  );
-}
-
 // ─── Main Page ────────────────────────────────────────────────────────────────
 
 export default function HelpResources() {
   const [activeModal, setActiveModal] = useState(null);
-  const [showContactModal, setShowContactModal] = useState(false);
+
   const [search, setSearch] = useState("");
   const [openFaq, setOpenFaq] = useState(null);
 
@@ -476,7 +278,7 @@ export default function HelpResources() {
           fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
         }}
       >
-        {/* ── Navbar (external component) ── */}
+        {/* ── Navbar ── */}
         <Navbar />
 
         {/* ── Hero Section ── */}
@@ -484,7 +286,7 @@ export default function HelpResources() {
           style={{
             background: "linear-gradient(160deg, #EEF2FF 0%, #F8FAFF 55%)",
             borderBottom: "1px solid #E2E8F0",
-            padding: "72px 48px 68px",
+            padding: "155px 48px 68px",
             textAlign: "center",
           }}
         >
@@ -531,7 +333,7 @@ export default function HelpResources() {
           </p>
 
           {/* Search bar */}
-          <div style={{ maxWidth: 520, margin: "0 auto", position: "relative" }}>
+          {/* <div style={{ maxWidth: 520, margin: "0 auto", position: "relative" }}>
             <Search
               size={18}
               color="#94A3B8"
@@ -542,8 +344,8 @@ export default function HelpResources() {
                 transform: "translateY(-50%)",
                 pointerEvents: "none",
               }}
-            />
-            <input
+            /> */}
+            {/* <input
               className="help-search"
               type="text"
               placeholder="Search help articles, tutorials, FAQs..."
@@ -562,8 +364,8 @@ export default function HelpResources() {
                 fontFamily: "inherit",
                 transition: "border-color 0.15s, box-shadow 0.15s",
               }}
-            />
-            {search && (
+            /> */}
+            {/* {search && (
               <button
                 onClick={() => setSearch("")}
                 style={{
@@ -581,121 +383,13 @@ export default function HelpResources() {
               >
                 <X size={14} color="#64748B" />
               </button>
-            )}
-          </div>
+            )} 
+          </div>*/}
         </div>
 
         {/* ── Page Body ── */}
         <div style={{ maxWidth: 1120, margin: "0 auto", padding: "56px 48px 80px" }}>
 
-          {/* Category label */}
-          <p
-            style={{
-              fontSize: 11,
-              fontWeight: 700,
-              color: "#94A3B8",
-              letterSpacing: "1.2px",
-              textTransform: "uppercase",
-              margin: "0 0 18px",
-            }}
-          >
-            Browse by category
-          </p>
-
-          {/* ── Resource Cards ── */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 20, marginBottom: 48 }}>
-            {menuItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <button
-                  key={item.id}
-                  className="resource-card"
-                  onClick={() => setActiveModal(item.id)}
-                  style={{
-                    background: "#fff",
-                    border: "1.5px solid #E2E8F0",
-                    borderRadius: 20,
-                    padding: "28px 24px 24px",
-                    cursor: "pointer",
-                    textAlign: "left",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 16,
-                    transition: "box-shadow 0.2s, border-color 0.2s, transform 0.18s",
-                    width: "100%",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = "0 12px 32px rgba(30,58,138,0.1)";
-                    e.currentTarget.style.borderColor = item.accentBorder;
-                    e.currentTarget.style.transform = "translateY(-3px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.boxShadow = "none";
-                    e.currentTarget.style.borderColor = "#E2E8F0";
-                    e.currentTarget.style.transform = "translateY(0)";
-                  }}
-                >
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                    <div
-                      style={{
-                        width: 50,
-                        height: 50,
-                        borderRadius: 14,
-                        background: item.iconBg,
-                        border: `1.5px solid ${item.accentBorder}`,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Icon size={22} color={item.iconColor} />
-                    </div>
-                    <span
-                      style={{
-                        fontSize: 11,
-                        fontWeight: 600,
-                        background: item.badgeBg,
-                        color: item.badgeColor,
-                        borderRadius: 20,
-                        padding: "4px 10px",
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      {item.badge}
-                    </span>
-                  </div>
-
-                  <div style={{ flex: 1 }}>
-                    <p
-                      style={{
-                        margin: "0 0 5px",
-                        fontSize: 15,
-                        fontWeight: 700,
-                        color: "#0F172A",
-                        letterSpacing: "-0.2px",
-                      }}
-                    >
-                      {item.title}
-                    </p>
-                    <p style={{ margin: 0, fontSize: 13, color: "#64748B", lineHeight: 1.55 }}>{item.subtitle}</p>
-                  </div>
-
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 5,
-                      color: item.iconColor,
-                      fontSize: 13,
-                      fontWeight: 600,
-                    }}
-                  >
-                    Explore <ChevronRight size={14} />
-                  </div>
-                </button>
-              );
-            })}
-          </div>
 
           {/* ── FAQ + Right Sidebar ── */}
           <div style={{ display: "grid", gridTemplateColumns: "1fr 296px", gap: 24 }}>
@@ -757,20 +451,17 @@ export default function HelpResources() {
                       No results for{" "}
                       <strong style={{ color: "#64748B" }}>"{search}"</strong>
                     </p>
-                    <button
-                      onClick={() => setShowContactModal(true)}
+                    <a
+                      href="mailto:aamblvtech@gmail.com"
                       style={{
-                        background: "none",
-                        border: "none",
                         color: "#4F46E5",
-                        cursor: "pointer",
                         fontSize: 14,
                         fontWeight: 600,
-                        padding: 0,
+                        textDecoration: "none",
                       }}
                     >
-                      Ask our support team →
-                    </button>
+                      Email our support team →
+                    </a>
                   </div>
                 ) : (
                   filteredFaq.map((f, i) => (
@@ -900,7 +591,7 @@ export default function HelpResources() {
                 ))}
               </div>
 
-              {/* Quick contact card */}
+              {/* Quick contact card — updated details */}
               <div
                 style={{
                   background: "#fff",
@@ -922,28 +613,19 @@ export default function HelpResources() {
                   Reach us via
                 </p>
                 {[
-                  { Icon: MessageCircle, label: "Live chat", sub: "Online now", color: "#4F46E5", bg: "#EEF2FF" },
-                  { Icon: Mail, label: "Email", sub: "support@sancharoo.com", color: "#D97706", bg: "#FFFBEB" },
-                  { Icon: Phone, label: "Call us", sub: "Mon–Fri, 9am–6pm", color: "#059669", bg: "#ECFDF5" },
+                  { Icon: Mail, label: "Email", sub: "aamblvtech@gmail.com", color: "#D97706", bg: "#FFFBEB" },
+                  { Icon: Phone, label: "Call us", sub: "+91 80083 03742", color: "#059669", bg: "#ECFDF5" },
                 ].map(({ Icon, label, sub, color, bg }, idx, arr) => (
-                  <button
+                  <div
                     key={label}
-                    onClick={() => setShowContactModal(true)}
                     style={{
                       display: "flex",
                       alignItems: "center",
                       gap: 12,
                       width: "100%",
                       padding: "11px 0",
-                      background: "none",
-                      border: "none",
                       borderBottom: idx < arr.length - 1 ? "1px solid #F1F5F9" : "none",
-                      cursor: "pointer",
-                      textAlign: "left",
-                      transition: "opacity 0.15s",
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
-                    onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
                   >
                     <div
                       style={{
@@ -963,8 +645,7 @@ export default function HelpResources() {
                       <p style={{ margin: 0, fontSize: 13, fontWeight: 600, color: "#1E293B" }}>{label}</p>
                       <p style={{ margin: 0, fontSize: 11, color: "#94A3B8" }}>{sub}</p>
                     </div>
-                    <ChevronRight size={14} color="#CBD5E1" />
-                  </button>
+                  </div>
                 ))}
               </div>
             </div>
@@ -1049,9 +730,9 @@ export default function HelpResources() {
                 Chat or call us anytime for quick support. Average response time is under 2 minutes.
               </p>
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                <button
+                <a
+                  href="mailto:aamblvtech@gmail.com"
                   className="banner-btn-primary"
-                  onClick={() => setShowContactModal(true)}
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
@@ -1065,10 +746,11 @@ export default function HelpResources() {
                     fontWeight: 700,
                     cursor: "pointer",
                     transition: "transform 0.15s",
+                    textDecoration: "none",
                   }}
                 >
-                  <MessageCircle size={16} /> Contact Support
-                </button>
+                  <Mail size={16} /> Email Us
+                </a>
                 <button
                   onClick={() => setActiveModal("video-guides")}
                   style={{
@@ -1096,14 +778,12 @@ export default function HelpResources() {
             {/* Channel buttons */}
             <div style={{ display: "flex", gap: 14, position: "relative", zIndex: 1 }}>
               {[
-                { Icon: MessageCircle, label: "Live chat", sub: "Online", bg: "rgba(99,102,241,0.22)" },
-                { Icon: Mail, label: "Email", sub: "24h reply", bg: "rgba(249,115,22,0.22)" },
-                { Icon: Phone, label: "Call", sub: "9am–6pm", bg: "rgba(16,185,129,0.22)" },
+                { Icon: Mail, label: "Email", sub: "aamblvtech@gmail.com", bg: "rgba(249,115,22,0.22)" },
+                { Icon: Phone, label: "Call", sub: "+91 80083 03742", bg: "rgba(16,185,129,0.22)" },
               ].map(({ Icon, label, sub, bg }) => (
                 <button
                   key={label}
                   className="banner-channel-btn"
-                  onClick={() => setShowContactModal(true)}
                   style={{
                     width: 94,
                     padding: "18px 12px",
@@ -1120,8 +800,8 @@ export default function HelpResources() {
                   }}
                 >
                   <Icon size={22} color="#fff" />
-                  <span style={{ fontSize: 12, fontWeight: 600, color: "#fff" }}>{label}</span>
-                  <span style={{ fontSize: 10, color: "rgba(255,255,255,0.55)" }}>{sub}</span>
+                  {/* <span style={{ fontSize: 12, fontWeight: 600, color: "#fff" }}>{label}</span>
+                  <span style={{ fontSize: 10, color: "rgba(255,255,255,0.55)" }}>{sub}</span> */}
                 </button>
               ))}
             </div>
@@ -1133,9 +813,7 @@ export default function HelpResources() {
       {activeModal && (
         <ResourceModal item={selectedItem} onClose={() => setActiveModal(null)} />
       )}
-      {showContactModal && (
-        <ContactModal onClose={() => setShowContactModal(false)} />
-      )}
+
     </>
   );
 }
