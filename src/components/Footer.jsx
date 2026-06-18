@@ -25,21 +25,19 @@ export default function Footer() {
             <div className="mt-6 space-y-2.5 text-sm text-white/70">
               <div className="flex items-center gap-2.5">
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-map-pin w-4 h-4 text-[#0099FB]"
-                  aria-hidden="true"
-                >
-                  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  strokeWidth="2"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+  className="w-8 h-8 text-[#0099FB]"
+  aria-hidden="true"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
                 Hunter Rd, beside PADMAVATHI GARDENS, Ramannapet, Warangal,
                 Telangana 506001
               </div>
@@ -152,7 +150,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/refer-and-earn"
                   className="text-sm text-white/65 hover:text-[#0099FB] transition-colors"
                 >
                   Refer &amp; earn
@@ -180,31 +178,7 @@ export default function Footer() {
                 >
                   About us
                 </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-sm text-white/65 hover:text-[#0099FB] transition-colors"
-                >
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-sm text-white/65 hover:text-[#0099FB] transition-colors"
-                >
-                  Press
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-sm text-white/65 hover:text-[#0099FB] transition-colors"
-                >
-                  Blog
-                </a>
-              </li>
+              </li>        
               <li>
                 <a
                   href="/contact"
@@ -266,7 +240,7 @@ export default function Footer() {
           </div>
           <div className="flex items-center gap-3">
             <a
-              href="#"
+              href="https://www.instagram.com/sancharoo_?igsh=MW5ya3duZmt5Zml3dA=="
               data-testid="footer-social-instagram"
               aria-label="instagram"
               className="w-10 h-10 grid place-items-center rounded-full bg-white/5 hover:bg-[#0099FB] border border-white/10 transition-all hover:-translate-y-0.5"

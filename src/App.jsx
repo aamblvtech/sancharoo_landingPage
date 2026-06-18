@@ -12,6 +12,7 @@ import WhyOffer from "./components/WhyOffer";
 import Support from "./components/CaptainSupport";
 import PrivacyPage from "./components/PrivacyPage";
 import ContactUs from "./components/ContactUs";
+import ReferEarn from "./components/ReferAndEarn";
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
@@ -90,6 +91,9 @@ export default function App() {
   }
   if (currentPath === "/contact") {
     return <ContactUs />;
+  }
+  if (currentPath === "/refer-and-earn") {
+    return <ReferEarn />;
   }
 
   return (
