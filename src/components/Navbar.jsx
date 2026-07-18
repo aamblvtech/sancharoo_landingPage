@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import { RIDER_WEB_APP_URL } from "../seo";
 import Logo from "./Logo";
 
 const navigation = [
-  { label: "Services", href: "#services", testId: "nav-services" },
-  { label: "Captain Pass", href: "#pass", testId: "nav-captain-pass" },
-  { label: "Why Sancharoo", href: "#why", testId: "nav-why-sancharoo" },
-  { label: "Download", href: "#download", testId: "nav-download" },
+  { label: "Services", href: "/#services", testId: "nav-services" },
+  { label: "Captain Pass", href: "/#pass", testId: "nav-captain-pass" },
+  { label: "Why Sancharoo", href: "/#why", testId: "nav-why-sancharoo" },
+  { label: "Download", href: "/#download", testId: "nav-download" },
 ];
 
 export default function Navbar() {
@@ -51,7 +52,7 @@ export default function Navbar() {
         `}
       >
         {/* Logo */}
-        <a href="#top" data-testid="brand-logo" onClick={closeMenu}>
+        <a href="/" data-testid="brand-logo" onClick={closeMenu}>
           <Logo />
         </a>
 
@@ -91,7 +92,9 @@ export default function Navbar() {
         {/* Desktop CTA */}
         <div className="hidden md:block">
           <a
-            href="#book"
+            href={RIDER_WEB_APP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             data-testid="nav-book-ride-btn"
             className="
               inline-flex
@@ -249,7 +252,9 @@ export default function Navbar() {
           </div>
 
           <a
-            href="#book"
+            href={RIDER_WEB_APP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={closeMenu}
             className="
               mt-4

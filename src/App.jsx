@@ -13,9 +13,19 @@ import Support from "./components/CaptainSupport";
 import PrivacyPage from "./components/PrivacyPage";
 import ContactUs from "./components/ContactUs";
 import ReferEarn from "./components/ReferAndEarn";
+import SeoJsonLd from "./components/SeoJsonLd";
+import {
+  applySeo,
+  buildOrganizationSchema,
+  buildSoftwareSchema,
+  buildWebsiteSchema,
+  routeMeta,
+} from "./seo";
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  const normalizedPath =
+    currentPath.length > 1 ? currentPath.replace(/\/$/, "") : currentPath;
 
   useEffect(() => {
     const handleLocationChange = () => {
@@ -34,70 +44,39 @@ export default function App() {
   }, []);
 
   const isPrivacyPage =
-    currentPath === "/privacy" || currentPath === "/privacy/";
+    normalizedPath === "/privacy" ||
+    normalizedPath === "/terms/rider" ||
+    normalizedPath === "/terms/captain" ||
+    normalizedPath === "/privacy/rider" ||
+    normalizedPath === "/privacy/captain";
 
   useEffect(() => {
-    if (!isPrivacyPage) {
-      document.title = "Sancharoo | Ride, Deliver and Earn";
-      const descMeta = document.querySelector('meta[name="description"]');
-      if (descMeta) {
-        descMeta.setAttribute(
-          "content",
-          "Book affordable bike and cab rides, send parcels, or earn as a Sancharoo captain with transparent pass-based pricing.",
-        );
-      }
-      const canonicalLink = document.querySelector('link[rel="canonical"]');
-      if (canonicalLink) {
-        canonicalLink.setAttribute("href", "https://sancharoo.com/");
-      }
-      // OG & Twitter tags
-      const ogTitle = document.querySelector('meta[property="og:title"]');
-      if (ogTitle)
-        ogTitle.setAttribute("content", "Sancharoo | Ride, Deliver and Earn");
-      const ogDesc = document.querySelector('meta[property="og:description"]');
-      if (ogDesc) {
-        ogDesc.setAttribute(
-          "content",
-          "Book affordable bike and cab rides, send parcels, or earn as a Sancharoo captain with transparent pass-based pricing.",
-        );
-      }
-      const ogUrl = document.querySelector('meta[property="og:url"]');
-      if (ogUrl) ogUrl.setAttribute("content", "https://sancharoo.com/");
-
-      const twitterTitle = document.querySelector('meta[name="twitter:title"]');
-      if (twitterTitle)
-        twitterTitle.setAttribute(
-          "content",
-          "Sancharoo | Ride, Deliver and Earn",
-        );
-      const twitterDesc = document.querySelector(
-        'meta[name="twitter:description"]',
-      );
-      if (twitterDesc) {
-        twitterDesc.setAttribute(
-          "content",
-          "Book affordable bike and cab rides, send parcels, or earn as a Sancharoo captain with transparent pass-based pricing.",
-        );
-      }
-    }
-  }, [isPrivacyPage]);
+    if (!isPrivacyPage) applySeo(routeMeta[normalizedPath] || routeMeta["/"]);
+  }, [normalizedPath, isPrivacyPage]);
 
   if (isPrivacyPage) {
     return <PrivacyPage />;
   }
 
-  if (currentPath === "/captain-support") {
+  if (normalizedPath === "/captain-support") {
     return <Support />;
   }
-  if (currentPath === "/contact") {
+  if (normalizedPath === "/contact") {
     return <ContactUs />;
   }
-  if (currentPath === "/refer-and-earn") {
+  if (normalizedPath === "/refer-and-earn") {
     return <ReferEarn />;
   }
 
   return (
     <div data-testid="landing-page" className="min-h-screen bg-[#F1F6FB]">
+      <SeoJsonLd
+        data={[
+          buildOrganizationSchema(),
+          buildWebsiteSchema(),
+          buildSoftwareSchema(),
+        ]}
+      />
       <Navbar />
       <main>
         <Hero />

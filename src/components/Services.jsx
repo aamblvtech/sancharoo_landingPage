@@ -2,6 +2,7 @@ import bikeTaxi from "../assets/bike-sancharoo.jpeg";
 import auto from "../assets/Auto.png";
 import parcel from "../assets/parcel.png";
 import cab from "../assets/cab.png";
+import { RIDER_WEB_APP_URL } from "../seo";
 export default function Services() {
   return (
     <section
@@ -19,19 +20,21 @@ export default function Services() {
               Our services
             </div>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0B1730] tracking-tight leading-tight">
-              Three ways to move.
+              Choose what you need.
               <br />
-              One app for all of them.
+              Ride or send a parcel.
             </h2>
           </div>
           <p className="md:max-w-sm text-slate-600 leading-relaxed">
-            Whether you're nipping out for chai, sending a parcel across the
-            city, or heading to a meeting — Sancharoo has the ride built for it.
+            Bike, Auto, Cab and Parcel options are available from the Rider app
+            with fare shown before booking.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-6">
           <a
-            href="#book"
+            href={RIDER_WEB_APP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             data-testid="service-bike-card"
             className="group relative overflow-hidden rounded-3xl md:col-span-8 md:row-span-2 min-h-[300px] md:min-h-[260px] block"
             style={{ opacity: 1, transform: "none" }}
@@ -47,7 +50,7 @@ export default function Services() {
               <div className="flex items-start justify-between">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 px-3 py-1 text-xs font-bold">
                   <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-                  3 min ETA
+                  from Rs 25 min fare
                 </span>
                 <span className="grid place-items-center w-10 h-10 rounded-full bg-white text-[#0B1730] transition-transform duration-300 group-hover:-rotate-45">
                   <svg
@@ -73,15 +76,15 @@ export default function Services() {
                   Bike Taxi
                 </h3>
                 <p className="mt-2 text-white/65 max-w-sm">
-                  Book affordable bike rides in seconds and reach your
-                  destination faster with SancHaroO. Enjoy safe, reliable, and
-                  convenient travel whenever you need it.
+                  Quick two-wheeler rides for short trips and daily commutes.
                 </p>
               </div>
             </div>
           </a>
           <a
-            href="#book"
+            href={RIDER_WEB_APP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             data-testid="service-cab-card"
             className="group relative overflow-hidden rounded-3xl md:col-span-4 min-h-[300px] md:min-h-[260px] block"
             style={{ opacity: 1, transform: "none" }}
@@ -97,7 +100,7 @@ export default function Services() {
               <div className="flex items-start justify-between">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 px-3 py-1 text-xs font-bold">
                   <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-                  8 min ETA
+                  from Rs 30 min fare
                 </span>
                 <span className="grid place-items-center w-10 h-10 rounded-full bg-white text-[#0B1730] transition-transform duration-300 group-hover:-rotate-45">
                   <svg
@@ -133,7 +136,9 @@ export default function Services() {
             </div>
           </a>
           <a
-            href="#book"
+            href={RIDER_WEB_APP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             data-testid="service-cab-card"
             className="group relative overflow-hidden rounded-3xl md:col-span-4 min-h-[300px] md:min-h-[260px] block"
             style={{ opacity: 1, transform: "none" }}
@@ -149,7 +154,7 @@ export default function Services() {
               <div className="flex items-start justify-between">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 px-3 py-1 text-xs font-bold">
                   <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-                  8 min ETA
+                  from Rs 60 min fare
                 </span>
                 <span className="grid place-items-center w-10 h-10 rounded-full bg-white text-[#0B1730] transition-transform duration-300 group-hover:-rotate-45">
                   <svg
@@ -175,16 +180,15 @@ export default function Services() {
                   Cab
                 </h3>
                 <p className="mt-2 text-white/65 max-w-sm">
-                  Book comfortable and reliable cab rides with SancHaroO.
-                  Whether it's a daily commute, airport transfer, business trip,
-                  or family outing, enjoy a safe and hassle-free journey every
-                  time.
+                  Comfortable rides for longer trips, work and family travel.
                 </p>
               </div>
             </div>
           </a>
           <a
-            href="#book"
+            href={RIDER_WEB_APP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             data-testid="service-parcel-card"
             className="group relative overflow-hidden rounded-3xl md:col-span-4 min-h-[300px] md:min-h-[260px] block"
             style={{ opacity: 1, transform: "none" }}
@@ -200,7 +204,7 @@ export default function Services() {
               <div className="flex items-start justify-between">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 px-3 py-1 text-xs font-bold">
                   <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-                  Doorstep pickup
+                  from Rs 45 min fare
                 </span>
                 <span className="grid place-items-center w-10 h-10 rounded-full bg-white text-[#0B1730] transition-transform duration-300 group-hover:-rotate-45">
                   <svg
@@ -226,7 +230,8 @@ export default function Services() {
                   Parcel
                 </h3>
                 <p className="mt-2 text-white/65 max-w-sm">
-                  Send documents, food, gifts across town — fast.
+                  Send documents, food and small items with pickup and receiver
+                  details.
                 </p>
               </div>
             </div>

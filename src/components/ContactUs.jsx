@@ -1,9 +1,13 @@
-import { MapPin, Phone, Mail, CheckCircle } from "lucide-react";
+import { Phone, Mail, CheckCircle } from "lucide-react";
+import { SUPPORT_EMAIL, SUPPORT_PHONE } from "../seo";
 import Footer from "./Footer";
+import Navbar from "./Navbar";
 
 export default function ContactUs() {
   return (
-    <section className="min-h-screen  py-20">
+    <div className="min-h-screen bg-[#F1F6FB]">
+      <Navbar />
+    <section className="min-h-screen  py-32">
       <div className="max-w-7xl mx-auto px-6">
 
         <div className="grid lg:grid-cols-2 overflow-hidden rounded-[32px]  shadow-[0_20px_60px_rgba(11,23,48,0.08)]">
@@ -52,24 +56,12 @@ export default function ContactUs() {
               <div className="mt-6 space-y-4">
 
                 <div className="flex gap-3">
-                  <MapPin
-                    size={20}
-                    className="text-[#0099FB] shrink-0 mt-1"
-                  />
-                  <span className="text-slate-600">
-                    Hunter Rd, beside PADMAVATHI GARDENS,
-                    Ramannapet, Warangal,
-                    Telangana 506001
-                  </span>
-                </div>
-
-                <div className="flex gap-3">
                   <Phone
                     size={20}
                     className="text-[#0099FB]"
                   />
                   <span className="text-slate-600">
-                    +91 80083 03742
+                    {SUPPORT_PHONE}
                   </span>
                 </div>
 
@@ -79,7 +71,7 @@ export default function ContactUs() {
                     className="text-[#0099FB]"
                   />
                   <span className="text-slate-600">
-                    aamblvtech@gmail.com
+                    {SUPPORT_EMAIL}
                   </span>
                 </div>
 
@@ -206,8 +198,9 @@ export default function ContactUs() {
 
       </div>
 
-      
     </section>
+      <Footer />
+    </div>
     
   );
 }

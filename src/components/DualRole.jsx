@@ -10,133 +10,62 @@ export default function DualRole() {
         className="absolute inset-0 dot-grid opacity-60"
       ></div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-12 items-center">
-        <div
-          className="lg:col-span-6"
-          style={{ opacity: 1, transform: "none" }}
-        >
+        <div className="lg:col-span-6">
           <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#0099FB] mb-3">
-            One identity
+            Rider and Captain apps
           </div>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0B1730] tracking-tight leading-[1.05]">
-            Rider going out.
+            One brand.
             <br />
-            <span className="text-[#0099FB]">Captain coming back.</span>
+            <span className="text-[#0099FB]">Two focused experiences.</span>
           </h2>
           <p className="mt-6 text-base md:text-lg text-slate-600 max-w-xl leading-relaxed">
-            With Sancharoo, you don't have to choose. Book a ride on your way to
-            work. Switch to{" "}
-            <strong className="text-[#0B1730]">Captain mode</strong> on your
-            ride home and earn from passengers headed your way. Same app. Same
-            wallet. Same you.
+            The Rider app handles trips and parcel bookings. The Captain app
+            handles onboarding, verification, recharges, rate cards, orders,
+            and earnings.
           </p>
           <div className="mt-8 space-y-4">
-            <div className="flex gap-4">
-              <div className="shrink-0 w-11 h-11 rounded-xl bg-[#E6F4FF] text-[#0099FB] grid place-items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-arrow-left-right w-5 h-5"
-                  aria-hidden="true"
-                >
-                  <path d="M8 3 4 7l4 4"></path>
-                  <path d="M4 7h16"></path>
-                  <path d="m16 21 4-4-4-4"></path>
-                  <path d="M20 17H4"></path>
-                </svg>
-              </div>
-              <div>
-                <div className="font-display font-bold text-[#0B1730]">
-                  Switch modes in one tap
+            {[
+              {
+                title: "Rider app",
+                body: "Book bike, auto, cab and parcel orders with route distance, duration and fare before booking.",
+              },
+              {
+                title: "Captain app",
+                body: "Captains add vehicle details, driving licence, RC and profile details before accepting orders.",
+              },
+              {
+                title: "No daily target",
+                body: "No daily target for captains to complete.",
+              }
+            ].map((item) => (
+              <div key={item.title} className="flex gap-4">
+                <div className="shrink-0 w-11 h-11 rounded-xl bg-[#E6F4FF] text-[#0099FB] grid place-items-center font-display font-black">
+                  +
                 </div>
-                <div className="text-sm text-slate-600 leading-relaxed mt-0.5">
-                  No two apps, no separate accounts. Toggle Rider ↔ Captain
-                  instantly.
+                <div>
+                  <div className="font-display font-bold text-[#0B1730]">
+                    {item.title}
+                  </div>
+                  <div className="text-sm text-slate-600 leading-relaxed mt-0.5">
+                    {item.body}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="flex gap-4">
-              <div className="shrink-0 w-11 h-11 rounded-xl bg-[#E6F4FF] text-[#0099FB] grid place-items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-wallet w-5 h-5"
-                  aria-hidden="true"
-                >
-                  <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path>
-                  <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path>
-                </svg>
-              </div>
-              <div>
-                <div className="font-display font-bold text-[#0B1730]">
-                  One unified wallet
-                </div>
-                <div className="text-sm text-slate-600 leading-relaxed mt-0.5">
-                  Earnings from rides automatically credit ride balance for your
-                  next trip.
-                </div>
-              </div>
-            </div>
-            <div className="flex gap-4">
-              <div className="shrink-0 w-11 h-11 rounded-xl bg-[#E6F4FF] text-[#0099FB] grid place-items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-refresh-ccw w-5 h-5"
-                  aria-hidden="true"
-                >
-                  <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
-                  <path d="M3 3v5h5"></path>
-                  <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path>
-                  <path d="M16 16h5v5"></path>
-                </svg>
-              </div>
-              <div>
-                <div className="font-display font-bold text-[#0B1730]">
-                  No daily targets
-                </div>
-                <div className="text-sm text-slate-600 leading-relaxed mt-0.5">
-                  Drive a single ride or fifty. Pass is paid — the rest is up to
-                  you.
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
-        <div
-          className="lg:col-span-6 relative"
-          style={{ opacity: 1, transform: "none" }}
-        >
-          <div className="relative aspect-square max-w-md mx-auto">
-            <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-[#0099FB] to-[#0077CC] shadow-[0_30px_80px_-20px_rgba(0,153,251,0.55)]"></div>
-            <div className="absolute inset-6 rounded-[1.5rem] bg-white p-6 flex flex-col justify-between">
+
+        <div className="lg:col-span-6 relative">
+          <div className="relative aspect-square max-w-md mx-auto rounded-[2rem] bg-gradient-to-br from-[#0099FB] to-[#0077CC] p-6 shadow-[0_30px_80px_-20px_rgba(0,153,251,0.55)]">
+            <div className="h-full rounded-[1.5rem] bg-white p-6 flex flex-col justify-between">
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
-                    Mode
+                    Captain app
                   </div>
                   <div className="font-display text-2xl font-extrabold text-[#0B1730] mt-0.5">
-                    Captain
+                    Access status
                   </div>
                 </div>
                 <div className="bg-[#10B981]/10 text-[#10B981] text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full">
@@ -145,23 +74,21 @@ export default function DualRole() {
               </div>
               <div className="bg-slate-50 rounded-2xl p-4">
                 <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">
-                  Today's earnings
+                  Trial access
                 </div>
                 <div className="font-display text-4xl font-extrabold text-[#0B1730] mt-1">
-                  ₹ 2,140
+                  2 free rides
                 </div>
-                <div className="flex items-center gap-2 mt-2">
-                  <div className="flex-1 h-1.5 bg-slate-200 rounded-full overflow-hidden">
-                    <div className="h-full w-3/4 bg-[#0099FB]"></div>
-                  </div>
-                  <span className="text-[10px] font-semibold text-slate-500">
-                    12 / 16 rides
-                  </span>
+                <div className="text-xs text-slate-500 mt-2">
+                  Recharge after trial to continue accepting rides.
                 </div>
               </div>
-              <div className="flex items-center gap-1 p-1 bg-slate-100 rounded-2xl">
-                <div className="flex-1 py-2.5 text-center text-xs font-bold bg-[#0099FB] text-white rounded-xl shadow">
-                  Captain
+              <div className="grid grid-cols-2 gap-2 text-center text-xs font-bold">
+                <div className="rounded-xl bg-[#E6F4FF] px-3 py-3 text-[#0099FB]">
+                  Rate card
+                </div>
+                <div className="rounded-xl bg-[#FEF3C7] px-3 py-3 text-[#92400E]">
+                  Ride requests
                 </div>
               </div>
             </div>

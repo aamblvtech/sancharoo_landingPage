@@ -20,6 +20,23 @@ const documentSources = {
 const POLICY_CACHE_VERSION = "v2";
 const getPolicyStorageKey = (id) =>
   `sancharoo_policy_${POLICY_CACHE_VERSION}_${id}`;
+const legalPathByTab = {
+  "terms-user": "/terms/rider",
+  "terms-captain": "/terms/captain",
+  "privacy-user": "/privacy/rider",
+  "privacy-captain": "/privacy/captain",
+};
+const legalTabByPath = Object.fromEntries(
+  Object.entries(legalPathByTab).map(([tab, path]) => [path, tab]),
+);
+const getTabFromLocation = () => {
+  const normalizedPath = window.location.pathname.replace(/\/$/, "") || "/";
+  const pathTab = legalTabByPath[normalizedPath];
+  if (pathTab) return pathTab;
+
+  const params = new URLSearchParams(window.location.search);
+  return params.get("tab");
+};
 
 const htmlToMarkdown = (html) => {
   const parsed = new DOMParser().parseFromString(html, "text/html");
@@ -118,9 +135,8 @@ export default function PrivacyPage() {
 
     loadDocuments();
 
-    // Set initial tab from URL query parameter
-    const params = new URLSearchParams(window.location.search);
-    const tabParam = params.get("tab");
+    // Set initial tab from clean path or legacy query parameter.
+    const tabParam = getTabFromLocation();
     if (tabParam && ids.includes(tabParam)) {
       setActiveTab(tabParam);
     }
@@ -140,8 +156,7 @@ export default function PrivacyPage() {
   // Handle browser back/forward buttons or URL query updates
   useEffect(() => {
     const handleUrlChange = () => {
-      const params = new URLSearchParams(window.location.search);
-      const tabParam = params.get("tab");
+      const tabParam = getTabFromLocation();
       if (tabParam && documents[tabParam]) {
         setActiveTab(tabParam);
       }
@@ -161,25 +176,25 @@ export default function PrivacyPage() {
         title: "Terms & Conditions for Riders | Sancharoo",
         description:
           "Read Sancharoo's rider terms and conditions. Learn about registration, fares, passenger conduct, and booking rules.",
-        canonical: "https://sancharoo.com/privacy?tab=terms-user",
+        canonical: "https://sancharoo.com/terms/rider",
       },
       "terms-captain": {
         title: "Terms & Conditions for Captains | Sancharoo",
         description:
           "Review Sancharoo's Captain terms and conditions. Learn about our commission-free pass-based pricing and partner guidelines.",
-        canonical: "https://sancharoo.com/privacy?tab=terms-captain",
+        canonical: "https://sancharoo.com/terms/captain",
       },
       "privacy-user": {
         title: "Privacy Policy for Riders | Sancharoo",
         description:
           "Read Sancharoo's Rider Privacy Policy. Learn how we collect, use, and protect passenger account data and location details.",
-        canonical: "https://sancharoo.com/privacy?tab=privacy-user",
+        canonical: "https://sancharoo.com/privacy/rider",
       },
       "privacy-captain": {
         title: "Privacy Policy for Captains | Sancharoo",
         description:
           "Read Sancharoo's Captain Privacy Policy. Learn about background location tracking, driver verification, and data safety.",
-        canonical: "https://sancharoo.com/privacy?tab=privacy-captain",
+        canonical: "https://sancharoo.com/privacy/captain",
       },
     };
 
@@ -270,7 +285,7 @@ export default function PrivacyPage() {
 
   const navigateToTab = (tabId) => {
     setActiveTab(tabId);
-    window.history.pushState({}, "", `/privacy?tab=${tabId}`);
+    window.history.pushState({}, "", legalPathByTab[tabId] || "/privacy");
     window.dispatchEvent(new Event("pushstate-change"));
     setSearchText("");
   };

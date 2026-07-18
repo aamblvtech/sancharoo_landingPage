@@ -1,4 +1,11 @@
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import {
+  CAPTAIN_PLAY_STORE_URL,
+  CAPTAIN_WEB_APP_URL,
+  RIDER_PLAY_STORE_URL,
+  RIDER_WEB_APP_URL,
+} from "../seo";
+
 export default function Download() {
   return (
     <section
@@ -27,127 +34,69 @@ export default function Download() {
               <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
                 The city moves faster with
                 <br />
-                <span className="text-[#FFD645]">sancharoo</span> in your
+                <span className="text-[#FFD645]">Sancharoo</span> in your
                 pocket.
               </h2>
               <p className="mt-5 text-white/90 max-w-lg">
-                Book bikes, cabs and parcels. Switch to captain in a tap. Track
-                every rupee. All in one tiny app.
+                Install the Android apps from Google Play, or use the web apps
+                on iPhone until the iOS app is available.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
-  href="#"
-  className="group inline-flex items-center gap-4 bg-[#0B1730] hover:bg-black text-white rounded-2xl px-6 h-16 transition-all"
->
-  <i className="fa-brands fa-google-play text-3xl"></i>
+                  href={RIDER_PLAY_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-4 bg-[#0B1730] hover:bg-black text-white rounded-2xl px-6 h-16 transition-all"
+                >
+                  <i className="fa-brands fa-google-play text-3xl"></i>
 
-  <div className="text-left">
-    <div className="text-[10px] uppercase tracking-wider text-white/70">
-      Coming Soon On
-    </div>
+                  <div className="text-left">
+                    
 
-    <div className="font-bold text-xl">
-      Google Play
-    </div>
-  </div>
-</a>
+                    <div className="font-bold text-xl">Rider App</div>
+                  </div>
+                </a>
                 <a
-  href="#"
-  className="group inline-flex items-center gap-4 bg-white text-[#0B1730] rounded-2xl px-6 h-16 hover:shadow-xl transition-all"
->
-  <i className="fa-brands fa-app-store-ios text-3xl"></i>
+                  href={CAPTAIN_PLAY_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-4 bg-white text-[#0B1730] rounded-2xl px-6 h-16 hover:shadow-xl transition-all"
+                >
+                  <i className="fa-brands fa-google-play text-3xl"></i>
 
-  <div className="text-left">
-    <div className="text-[10px] uppercase tracking-wider text-slate-500">
-      Coming Soon On
-    </div>
+                  <div className="text-left">
+                    
 
-    <div className="font-bold text-xl">
-      App Store
-    </div>
-  </div>
-</a>
+                    <div className="font-bold text-xl">Captain App</div>
+                  </div>
+                </a>
               </div>
-              <div className="mt-8 flex items-center gap-3 text-white/90">
-                <div className="flex">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-star w-4 h-4 fill-[#FFD645] text-[#FFD645]"
-                    aria-hidden="true"
-                  >
-                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
-                  </svg>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-star w-4 h-4 fill-[#FFD645] text-[#FFD645]"
-                    aria-hidden="true"
-                  >
-                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
-                  </svg>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-star w-4 h-4 fill-[#FFD645] text-[#FFD645]"
-                    aria-hidden="true"
-                  >
-                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
-                  </svg>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-star w-4 h-4 fill-[#FFD645] text-[#FFD645]"
-                    aria-hidden="true"
-                  >
-                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
-                  </svg>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-star w-4 h-4 fill-[#FFD645] text-[#FFD645]"
-                    aria-hidden="true"
-                  >
-                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
-                  </svg>
-                </div>
-                <div className="text-sm font-semibold">4.8</div>
+              <div className="mt-5 flex flex-wrap gap-4 text-sm font-semibold">
+                <a
+                  href={RIDER_WEB_APP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white underline decoration-white/40 underline-offset-4 hover:decoration-white"
+                >
+                  Use Rider Web App
+                </a>
+                <a
+                  href={CAPTAIN_WEB_APP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white underline decoration-white/40 underline-offset-4 hover:decoration-white"
+                >
+                  Use Captain Web App
+                </a>
               </div>
+              {/* <div className="mt-8 flex flex-wrap gap-3 text-sm font-semibold text-white/90">
+                <span className="rounded-full bg-white/10 px-4 py-2">
+                  Android apps on Google Play
+                </span>
+                <span className="rounded-full bg-white/10 px-4 py-2">
+                  Web apps available for browser and iPhone
+                </span>
+              </div> */}
             </div>
             <div className="lg:col-span-5 relative">
               <div className="relative mx-auto w-[260px] md:w-[300px] aspect-[9/19] rounded-[2.4rem] border-[10px] border-[#0B1730] bg-white shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)] overflow-hidden animate-float">
