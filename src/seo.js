@@ -1,4 +1,4 @@
-export const SITE_URL = "https://sancharoo.com";
+export const SITE_URL = "https://sancharoo.in";
 export const SITE_NAME = "Sancharoo";
 export const COMPANY_NAME = "Aamblv Technologies Pvt. Ltd.";
 export const SUPPORT_EMAIL = "aamblvtech@gmail.com";

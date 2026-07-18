@@ -1,0 +1,23 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "sancharoo.com" }],
+      "destination": "https://sancharoo.in/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.sancharoo.com" }],
+      "destination": "https://sancharoo.in/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.sancharoo.in" }],
+      "destination": "https://sancharoo.in/:path*",
+      "permanent": true
+    }
+  ],
+  "rewrites": [{ "source": "/:path*", "destination": "/" }]
+}

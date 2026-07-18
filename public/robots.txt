@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sancharoo.com/sitemap.xml
+Sitemap: https://sancharoo.in/sitemap.xml

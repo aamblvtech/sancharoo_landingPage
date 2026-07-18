@@ -176,25 +176,25 @@ export default function PrivacyPage() {
         title: "Terms & Conditions for Riders | Sancharoo",
         description:
           "Read Sancharoo's rider terms and conditions. Learn about registration, fares, passenger conduct, and booking rules.",
-        canonical: "https://sancharoo.com/terms/rider",
+        canonical: "https://sancharoo.in/terms/rider",
       },
       "terms-captain": {
         title: "Terms & Conditions for Captains | Sancharoo",
         description:
           "Review Sancharoo's Captain terms and conditions. Learn about our commission-free pass-based pricing and partner guidelines.",
-        canonical: "https://sancharoo.com/terms/captain",
+        canonical: "https://sancharoo.in/terms/captain",
       },
       "privacy-user": {
         title: "Privacy Policy for Riders | Sancharoo",
         description:
           "Read Sancharoo's Rider Privacy Policy. Learn how we collect, use, and protect passenger account data and location details.",
-        canonical: "https://sancharoo.com/privacy/rider",
+        canonical: "https://sancharoo.in/privacy/rider",
       },
       "privacy-captain": {
         title: "Privacy Policy for Captains | Sancharoo",
         description:
           "Read Sancharoo's Captain Privacy Policy. Learn about background location tracking, driver verification, and data safety.",
-        canonical: "https://sancharoo.com/privacy/captain",
+        canonical: "https://sancharoo.in/privacy/captain",
       },
     };
 
@@ -202,7 +202,7 @@ export default function PrivacyPage() {
       title: "Privacy Policy & Terms | Sancharoo",
       description:
         "Read the official Terms of Service and Privacy Policies for Sancharoo Passengers and Captains.",
-      canonical: "https://sancharoo.com/privacy",
+      canonical: "https://sancharoo.in/privacy",
     };
 
     document.title = seo.title;
